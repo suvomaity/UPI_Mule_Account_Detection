@@ -1,2 +1,0 @@
-run = "bash start-all.sh"
-modules = ["nodejs-20", "python-3.11"]

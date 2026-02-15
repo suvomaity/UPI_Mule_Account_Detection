@@ -298,9 +298,10 @@ def get_all_accounts() -> Dict[str, Any]:
 
 @app.get("/score/{account_id}")
 async def score(
-    account_id: str = Path(..., min_length=1)
+    account_id: str = Path(..., min_length=1),
+    current_user: User = Depends(get_current_active_user)
 ) -> Dict[str, Any]:
-    """Score a single account for mule risk in real-time. Public endpoint for demo."""
+    """Score a single account for mule risk in real-time. Requires authentication."""
     try:
         logger.info(f"GET /score/{account_id} - Scoring account")
         
@@ -326,8 +327,11 @@ async def score(
 
 
 @app.post("/batch_score")
-async def batch_score(req: BatchRequest) -> Dict[str, Any]:
-    """Score multiple accounts in a single batch call. Public endpoint for demo."""
+async def batch_score(
+    req: BatchRequest,
+    current_user: User = Depends(get_current_active_user)
+) -> Dict[str, Any]:
+    """Score multiple accounts in a single batch call. Requires authentication."""
     try:
         logger.info(f"POST /batch_score - Scoring {len(req.account_ids)} accounts")
         
@@ -358,8 +362,10 @@ async def batch_score(req: BatchRequest) -> Dict[str, Any]:
 
 
 @app.get("/stats")
-async def stats() -> Dict[str, Any]:
-    """Get system-wide risk statistics. Public endpoint for demo."""
+async def stats(
+    current_user: User = Depends(get_current_active_user)
+) -> Dict[str, Any]:
+    """Get system-wide risk statistics. Requires authentication."""
     try:
         logger.info(f"GET /stats - Fetching system statistics")
         txns, accounts, devices, G = _get_data()

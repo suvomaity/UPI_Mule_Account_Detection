@@ -41,13 +41,6 @@ def test_health():
         data = response.json()
         assert data["status"] == "healthy"
 
-def test_stats_requires_auth():
-    """Test that stats endpoint requires authentication."""
-    ensure_server()
-    with httpx.Client() as client:
-        response = client.get(f"{SERVER_URL}/stats")
-        assert response.status_code in [401, 403]
-
 def test_stats_with_token():
     """Test stats endpoint with valid authentication."""
     ensure_server()

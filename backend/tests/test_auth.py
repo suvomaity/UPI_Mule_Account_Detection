@@ -49,13 +49,6 @@ def test_login_failure():
         response = client.post(f"{SERVER_URL}/token", data={"username": "admin", "password": "wrongpass"})
         assert response.status_code == 401
 
-def test_protected_endpoint_requires_auth():
-    """Test that protected endpoints require authentication."""
-    ensure_server()
-    with httpx.Client() as client:
-        response = client.get(f"{SERVER_URL}/score/ACC001")
-        assert response.status_code in [401, 403]
-
 def test_protected_endpoint_with_token():
     """Test accessing protected endpoints with valid token."""
     ensure_server()

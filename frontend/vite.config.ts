@@ -26,6 +26,7 @@ import path from 'path'
  */
 
 export default defineConfig({
+  base: '/UPI_Mule_Account_Detection/',
   plugins: [react()],
   resolve: {
     alias: {

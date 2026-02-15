@@ -10,11 +10,6 @@ services:
         value: production
       - key: PORT
         value: 8000
-    healthCheckPath: /health
-    healthCheckInterval: 30
-    scaling:
-      minInstances: 1
-      maxInstances: 1
 
   - type: web
     name: upi-mule-frontend
@@ -22,13 +17,6 @@ services:
     dockerfilePath: ./frontend/Dockerfile
     envVars:
       - key: VITE_API_BASE_URL
-        fromService:
-          name: upi-mule-backend
-          property: url
+        value: https://upi-mule-backend.onrender.com
       - key: NODE_ENV
         value: production
-    healthCheckPath: /
-    healthCheckInterval: 30
-    scaling:
-      minInstances: 1
-      maxInstances: 1

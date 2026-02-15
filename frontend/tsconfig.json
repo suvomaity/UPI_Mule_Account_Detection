@@ -9,7 +9,6 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "types": ["vite/client"],
 
     "strict": false,
     "noUnusedLocals": false,
